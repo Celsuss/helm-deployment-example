@@ -39,6 +39,6 @@ Delete the development deployment:
 `helm uninstall flask-app-example-dev --namespace flask-app-example-namespace`
 
 Delete the namespace:
-`kubectl delete namespace flask-app-namespace`
+`kubectl delete namespace flask-app-example-namespace`
 
 This will remove all the resources associated with your Flask application in Kubernetes.
