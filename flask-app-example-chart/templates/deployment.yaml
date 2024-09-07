@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "flask-app-example-chart.fullname" . }}
+  labels:
+    app: {{ include "flask-app-example-chart.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "flask-app-example-chart.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "flask-app-example-chart.name" . }}
+    spec:
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecretName }}
+      containers:
+      - name: flask-app-example
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
